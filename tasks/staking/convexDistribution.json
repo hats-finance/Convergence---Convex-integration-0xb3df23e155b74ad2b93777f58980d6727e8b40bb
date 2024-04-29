@@ -1,0 +1,122 @@
+{
+    "CvgCvxStaking": {
+        "stakingAddress": "0xE5b6F5e695BA6E4aeD92B68c4CC8Df1160D69A81",
+        "bufferAddress": "0xD61210E756f7D71Cc4F74abF0747D65Ea9d7525b",
+        "rewards": [
+            {
+                "tokenName": "CVX",
+                "tokenAddress": "0x4e3FBD56CD56c3e72c1403e103b45Db9da5B9D2B",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "CRV",
+                "tokenAddress": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "FXS",
+                "tokenAddress": "0x3432b6a60d23ca0dfca7761b7ab56459d9c964d0",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ]
+    },
+    "CvxCrvStaking": {
+        "stakingAddress": "0xb8637a2DE1b289D3eA13f161418404C1a7bCEB5F",
+        "bufferAddress": "0xd7FF6e84a606Ad13DE226BD7Bf077aA5ae51bbe1",
+        "rewards": [
+            {
+                "tokenName": "CVX",
+                "tokenAddress": "0x4e3FBD56CD56c3e72c1403e103b45Db9da5B9D2B",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "CRV",
+                "tokenAddress": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "3Crv",
+                "tokenAddress": "0x6c3F90f043a72FA612cbac8115EE7e52BDe6E490",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ]
+    },
+    "CvxFpisStaking": {
+        "stakingAddress": "0x097DdA9c34006D8B6F866c0ee519bafA3cC4eb2F",
+        "bufferAddress": "0x002bb22E398966A5ba880Fc2744F693DED90dF09",
+        "rewards": [
+            {
+                "tokenName": "CVX",
+                "tokenAddress": "0x4e3FBD56CD56c3e72c1403e103b45Db9da5B9D2B",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "FPIS",
+                "tokenAddress": "0xc2544A32872A91F4A553b404C6950e89De901fdb",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ]
+    },
+    "CvxFxnStaking": {
+        "stakingAddress": "0x96A3fB683665c35829Ff87B1C6915E0795F69D33",
+        "bufferAddress": "0xD31eF69D88A4A583a3388EA879151adB9b0eF259",
+        "rewards": [
+            {
+                "tokenName": "CVX",
+                "tokenAddress": "0x4e3FBD56CD56c3e72c1403e103b45Db9da5B9D2B",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "FXN",
+                "tokenAddress": "0x365AccFCa291e7D3914637ABf1F7635dB165Bb09",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ]
+    },
+    "CvxFxsStaking": {
+        "stakingAddress": "0x6Df4D5891218d3cF9fe98377E3E13d89247D3728",
+        "bufferAddress": "0xBef869B20EF42b409a424bff048B4d4a061723Ee",
+        "rewards": [
+            {
+                "tokenName": "CVX",
+                "tokenAddress": "0x4e3FBD56CD56c3e72c1403e103b45Db9da5B9D2B",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "FXS",
+                "tokenAddress": "0x3432B6A60D23Ca0dFCa7761B7ab56459D9C964D0",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ]
+    },
+    "CvxPrismaStaking": {
+        "stakingAddress": "0xB4d9E161a4F5969CAa602bCae1Ee9F400538F4E1",
+        "bufferAddress": "0x239808317229610E3C6Ab83E9bda48F69C915bb2",
+        "rewards": [
+            {
+                "tokenName": "CVX",
+                "tokenAddress": "0x4e3FBD56CD56c3e72c1403e103b45Db9da5B9D2B",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "PRISMA",
+                "tokenAddress": "0xdA47862a83dac0c112BA89c6abC2159b95afd71C",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ]
+    }
+}

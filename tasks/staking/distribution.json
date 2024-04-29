@@ -1,0 +1,649 @@
+{
+    "CvgSdtStaking": {
+        "stakingAddress": "0xF941BC649Ef0B20ABd7f6dC78CA8f8E225337933",
+        "gaugeAddress": "0x0000000000000000000000000000000000000000",
+        "gaugeRewards": [
+            {
+                "tokenName": "SdFrax3CRV",
+                "tokenAddress": "0x5af15DA84A4a6EDf2d9FA6720De921E1026E37b7",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Sdt",
+                "tokenAddress": "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "CvgSdt",
+                "tokenAddress": "0x830614aE209FF9d8706d386fcdBc7a55206fcffC",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ],
+        "bribeRewards": []
+    },
+    "sdCRVGAUGEContractStaking": {
+        "stakingAddress": "0x2FF160bcADb485b5F048b9880e6f471Af632060c",
+        "gaugeAddress": "0x7f50786A0b15723D741727882ee99a0BF34e3466",
+        "gaugeRewards": [
+            {
+                "tokenName": "Stake DAO Token",
+                "tokenAddress": "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Curve.fi DAI/USDC/USDT",
+                "tokenAddress": "0x6c3F90f043a72FA612cbac8115EE7e52BDe6E490",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Curve DAO Token",
+                "tokenAddress": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ],
+        "bribeRewards": [
+            {
+                "tokenName": "Stake DAO CRV",
+                "tokenAddress": "0xD1b5651E55D4CeeD36251c61c50C889B36F6abB5",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ]
+    },
+    "sdANGLEGAUGEContractStaking": {
+        "stakingAddress": "0x097EcA928C08DfE0F89B18A22E20EBF85Df2Cb01",
+        "gaugeAddress": "0xE55843a90672f7d8218285e51EE8fF8E233F35d5",
+        "gaugeRewards": [
+            {
+                "tokenName": "Stake DAO Token",
+                "tokenAddress": "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "sanUSDC_EUR",
+                "tokenAddress": "0x9C215206Da4bf108aE5aEEf9dA7caD3352A36Dad",
+                "tokenDecimals": 6,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "agEUR",
+                "tokenAddress": "0x1a7e4e63778B4f12a199C062f3eFdD288afCBce8",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "ANGLE",
+                "tokenAddress": "0x31429d1856aD1377A8A0079410B297e1a9e214c2",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ],
+        "bribeRewards": [
+            {
+                "tokenName": "Stake DAO ANGLE",
+                "tokenAddress": "0x752B4c6e92d96467fE9b9a2522EF07228E00F87c",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ]
+    },
+    "sdFXSGAUGEContractStaking": {
+        "stakingAddress": "0x3C1729DdbF9d83eF2a3bfAb5aE31e046972879FD",
+        "gaugeAddress": "0xF3C6e8fbB946260e8c2a55d48a5e01C82fD63106",
+        "gaugeRewards": [
+            {
+                "tokenName": "Stake DAO Token",
+                "tokenAddress": "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Frax Share",
+                "tokenAddress": "0x3432B6A60D23Ca0dFCa7761B7ab56459D9C964D0",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ],
+        "bribeRewards": [
+            {
+                "tokenName": "Stake DAO FXS",
+                "tokenAddress": "0x402F878BDd1f5C66FdAF0fabaBcF74741B68ac36",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ]
+    },
+    "sdBALGAUGEContractStaking": {
+        "stakingAddress": "0xAf5b3f4A0b4dc334dB7137E5584E0e971E5e4962",
+        "gaugeAddress": "0x3E8C72655e48591d93e6dfdA16823dB0fF23d859",
+        "gaugeRewards": [
+            {
+                "tokenName": "Stake DAO Token",
+                "tokenAddress": "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Balancer Aave Boosted StablePool (USD)",
+                "tokenAddress": "0x7B50775383d3D6f0215A8F290f2C9e2eEBBEceb2",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Balancer",
+                "tokenAddress": "0xba100000625a3754423978a60c9317c58a424e3D",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "USD Coin",
+                "tokenAddress": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+                "tokenDecimals": 6,
+                "amountToDistribute": "0"
+            }
+        ],
+        "bribeRewards": [
+            {
+                "tokenName": "Stake DAO Balancer",
+                "tokenAddress": "0xF24d8651578a55b0C119B9910759a351A3458895",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ]
+    },
+    "sdPENDLEGAUGEContractStaking": {
+        "stakingAddress": "0x508f0e1b565b40aeb94671bed228083203330882",
+        "gaugeAddress": "0x50DC9aE51f78C593d4138263da7088A973b8184E",
+        "gaugeRewards": [
+            {
+                "tokenName": "Stake DAO Token",
+                "tokenAddress": "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Wrapped Ether",
+                "tokenAddress": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Pendle",
+                "tokenAddress": "0x808507121B80c02388fAd14726482e061B8da827",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ],
+        "bribeRewards": [
+            {
+                "tokenName": "Stake DAO PENDLE",
+                "tokenAddress": "0x5Ea630e00D6eE438d3deA1556A110359ACdc10A9",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ]
+    },
+    "sdFXNGAUGEContractStaking": {
+        "stakingAddress": "0x35e30Bc815935Bb5EC1743f772331864D780cc26",
+        "gaugeAddress": "0xbcfE5c47129253C6B8a9A00565B3358b488D42E0",
+        "gaugeRewards": [
+            {
+                "tokenName": "Stake DAO Token",
+                "tokenAddress": "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Wrapped liquid staked Ether 2.0",
+                "tokenAddress": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ],
+        "bribeRewards": [
+            {
+                "tokenName": "Stake DAO FXN",
+                "tokenAddress": "0xe19d1c837B8A1C83A56cD9165b2c0256D39653aD",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ]
+    },
+    "triUSDCGAUGEContractStaking": {
+        "stakingAddress": "0x9850F0B1BEb85C77CEE56bBC7e59F92c46C6b1Fa",
+        "gaugeAddress": "0x44b4e01c249e35B2803f947C5CcB9868C3421437",
+        "gaugeRewards": [
+            {
+                "tokenName": "Stake DAO Token",
+                "tokenAddress": "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Curve DAO Token",
+                "tokenAddress": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ],
+        "bribeRewards": []
+    },
+    "triUSDT2GAUGEContractStaking": {
+        "stakingAddress": "0x73767FcF3288945401109d2300a2241cEEb82385",
+        "gaugeAddress": "0x4D69ad5F243571AA9628bd88ebfFA2C913427b0b",
+        "gaugeRewards": [
+            {
+                "tokenName": "Stake DAO Token",
+                "tokenAddress": "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Curve DAO Token",
+                "tokenAddress": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ],
+        "bribeRewards": []
+    },
+    "triLLAMAGAUGEContractStaking": {
+        "stakingAddress": "0x8e2fea48d280a6634c7bd0e7e707a217ff4c8d46",
+        "gaugeAddress": "0x608E4105e49ce2562521e31936815e2E20dA6609",
+        "gaugeRewards": [
+            {
+                "tokenName": "Stake DAO Token",
+                "tokenAddress": "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Curve DAO Token",
+                "tokenAddress": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Wrapped liquid staked Ether 2.0",
+                "tokenAddress": "0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ],
+        "bribeRewards": []
+    },
+    "triCRVGAUGEContractStaking": {
+        "stakingAddress": "0x5e561bb124a9f67c7DB2d4a5730b9150900A6F2f",
+        "gaugeAddress": "0x86F8d09EfD8ad2c85Fee831f2730d1766A39ec18",
+        "gaugeRewards": [
+            {
+                "tokenName": "Stake DAO Token",
+                "tokenAddress": "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Curve DAO Token",
+                "tokenAddress": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ],
+        "bribeRewards": []
+    },
+    "crvUSDUSDTGAUGEContractStaking": {
+        "stakingAddress": "0x1224D1f1507433bFD5b49CDB2E16f98e5D7C3900",
+        "gaugeAddress": "0x4875D5E7987C93431E6DB9DC53A136F46270F0Dc",
+        "gaugeRewards": [
+            {
+                "tokenName": "Stake DAO Token",
+                "tokenAddress": "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Curve DAO Token",
+                "tokenAddress": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ],
+        "bribeRewards": []
+    },
+    "STGUSDCGAUGEContractStaking": {
+        "stakingAddress": "0xfbB4931e0b3C702A1e2F2239a2B13d104773c851",
+        "gaugeAddress": "0xA89B9c336764c9Ae5f64Bc19688601341974bc22",
+        "gaugeRewards": [
+            {
+                "tokenName": "Stake DAO Token",
+                "tokenAddress": "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Curve DAO Token",
+                "tokenAddress": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ],
+        "bribeRewards": []
+    },
+    "sdCRVCRVGAUGEContractStaking": {
+        "stakingAddress": "0xd91559b60589Bd503286F16E7856DC8E13147E04",
+        "gaugeAddress": "0xA9812ED1077938E88577be7A8eaf097b5337fF5b",
+        "gaugeRewards": [
+            {
+                "tokenName": "Stake DAO Token",
+                "tokenAddress": "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Curve DAO Token",
+                "tokenAddress": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ],
+        "bribeRewards": []
+    },
+    "USDCcrvUSDGAUGEContractStaking": {
+        "stakingAddress": "0xd5077110be155fa71b3f220cdfa1406792e5fe04",
+        "gaugeAddress": "0x1f1a798cBDf4E9d533CEB9386e0A19b8C3F99121",
+        "gaugeRewards": [
+            {
+                "tokenName": "Stake DAO Token",
+                "tokenAddress": "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Curve DAO Token",
+                "tokenAddress": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ],
+        "bribeRewards": []
+    },
+    "frxETHETHGAUGEContractStaking": {
+        "stakingAddress": "0x9165889062d345cdf8973483c917ec76946c26e2",
+        "gaugeAddress": "0x131Dc928F9Dad07F43CEfF269e1674b7eBbFcBB1",
+        "gaugeRewards": [
+            {
+                "tokenName": "Stake DAO Token",
+                "tokenAddress": "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Curve DAO Token",
+                "tokenAddress": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ],
+        "bribeRewards": []
+    },
+    "cvxCRVCRVGAUGEContractStaking": {
+        "stakingAddress": "0xd15094c84325688E58e3cf9e7Dc9F3Cc61B052cC",
+        "gaugeAddress": "0xc0A63f4f3033a1f09804624f9666Fd214925FD06",
+        "gaugeRewards": [
+            {
+                "tokenName": "Stake DAO Token",
+                "tokenAddress": "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Curve DAO Token",
+                "tokenAddress": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ],
+        "bribeRewards": []
+    },
+    "FRAXBPGAUGEContractStaking": {
+        "stakingAddress": "0xaF0CF4F367f002ceE1Ade4c1a91021ba21a31C41",
+        "gaugeAddress": "0xBe77585F4159e674767Acf91284160E8C09b96D8",
+        "gaugeRewards": [
+            {
+                "tokenName": "Stake DAO Token",
+                "tokenAddress": "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Curve DAO Token",
+                "tokenAddress": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ],
+        "bribeRewards": []
+    },
+    "alUSDFRAXBPGAUGEContractStaking": {
+        "stakingAddress": "0x262E218C08cc8Db8A3e5dC5b20C3A7625d0d963c",
+        "gaugeAddress": "0x1B31C86024145583Ff37024A6B9aa8581A5070De",
+        "gaugeRewards": [
+            {
+                "tokenName": "Stake DAO Token",
+                "tokenAddress": "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Curve DAO Token",
+                "tokenAddress": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ],
+        "bribeRewards": []
+    },
+    "ETHrETHGAUGEContractStaking": {
+        "stakingAddress": "0x8d293b32CeF1FfdF7a23e1d5BD081697E7765701",
+        "gaugeAddress": "0x0bDabcDc2d2d41789A8F225F66ADbdc0CbDF6641",
+        "gaugeRewards": [
+            {
+                "tokenName": "Stake DAO Token",
+                "tokenAddress": "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Curve DAO Token",
+                "tokenAddress": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "StaFi",
+                "tokenAddress": "0xef3A930e1FfFFAcd2fc13434aC81bD278B0ecC8d",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ],
+        "bribeRewards": []
+    },
+    "COILFRAXBPGAUGEContractStaking": {
+        "stakingAddress": "0x8D4619E34b2332042CBc8040541D0E7321ced7dE",
+        "gaugeAddress": "0x83EB53801dDaC98eCaaA6Ee5Ed859F08b1f4D905",
+        "gaugeRewards": [
+            {
+                "tokenName": "Stake DAO Token",
+                "tokenAddress": "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Curve DAO Token",
+                "tokenAddress": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ],
+        "bribeRewards": []
+    },
+    "DOLAcrvUSDGAUGEContractStaking": {
+        "stakingAddress": "0x1254c039A0262991613135CD206405111b7D1756",
+        "gaugeAddress": "0xf95E265F70874a0261F8F4a59822451c86f65b68",
+        "gaugeRewards": [
+            {
+                "tokenName": "Stake DAO Token",
+                "tokenAddress": "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Curve DAO Token",
+                "tokenAddress": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ],
+        "bribeRewards": []
+    },
+    "XAIFRAXBPGAUGEContractStaking": {
+        "stakingAddress": "0xBf916F21555a0265116222F8286f1D515B63c555",
+        "gaugeAddress": "0x4b95F9f85857341cC2876c15C88091a04eE5Cb31",
+        "gaugeRewards": [
+            {
+                "tokenName": "Stake DAO Token",
+                "tokenAddress": "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Curve DAO Token",
+                "tokenAddress": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ],
+        "bribeRewards": []
+    },
+    "crvUSDFRAXGAUGEContractStaking": {
+        "stakingAddress": "0xa042a45a7729ab0d3e26b2bad033dcd3c7c964fd",
+        "gaugeAddress": "0xc31f496aaE237599872ac78611b245Bfe70fB06e",
+        "gaugeRewards": [
+            {
+                "tokenName": "Stake DAO Token",
+                "tokenAddress": "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Curve DAO Token",
+                "tokenAddress": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ],
+        "bribeRewards": []
+    },
+    "dETHfrxETHGAUGEContractStaking": {
+        "stakingAddress": "0x7C49861Ba9cD2Fa38ef146680EeE0f23Fd9C14DF",
+        "gaugeAddress": "0x799b35467C53F388D0c41D5f4EFFf8bAd7b33e96",
+        "gaugeRewards": [
+            {
+                "tokenName": "Stake DAO Token",
+                "tokenAddress": "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Curve DAO Token",
+                "tokenAddress": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ],
+        "bribeRewards": []
+    },
+    "ETH+WETHGAUGEContractStaking": {
+        "stakingAddress": "0x6955656170c77F64C6BC2219EcFAEa8F8979a94d",
+        "gaugeAddress": "0xE94aFF2Bd6A12DD16C21648Cae71D2B47E405a9C",
+        "gaugeRewards": [
+            {
+                "tokenName": "Stake DAO Token",
+                "tokenAddress": "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Curve DAO Token",
+                "tokenAddress": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ],
+        "bribeRewards": []
+    },
+    "WETHSDTGAUGEContractStaking": {
+        "stakingAddress": "0x11886B0ed77e9a434cB3185eF27F211C6BD696bF",
+        "gaugeAddress": "0xC891a1BaCF802127874054e703b386346fE94b00",
+        "gaugeRewards": [
+            {
+                "tokenName": "Stake DAO Token",
+                "tokenAddress": "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Curve DAO Token",
+                "tokenAddress": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ],
+        "bribeRewards": []
+    },
+    "pxETHstETHGAUGEContractStaking": {
+        "stakingAddress": "0x3911D9b1fF60Dd08B998E6afAd9A70bcb7Cf5EF0",
+        "gaugeAddress": "0x6e1B39d3da150AF18518Ad56D3Caf6AFc39afD7d",
+        "gaugeRewards": [
+            {
+                "tokenName": "Stake DAO Token",
+                "tokenAddress": "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Curve DAO Token",
+                "tokenAddress": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ],
+        "bribeRewards": []
+    },
+    "pxETHfrxETHGAUGEContractStaking": {
+        "stakingAddress": "0x67610954d57145D36A332329CCA119035A3e821E",
+        "gaugeAddress": "0xb940c40EE41Aa18972A9CE04112B500E108a997b",
+        "gaugeRewards": [
+            {
+                "tokenName": "Stake DAO Token",
+                "tokenAddress": "0x73968b9a57c6E53d41345FD57a6E6ae27d6CDB2F",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            },
+            {
+                "tokenName": "Curve DAO Token",
+                "tokenAddress": "0xD533a949740bb3306d119CC777fa900bA034cd52",
+                "tokenDecimals": 18,
+                "amountToDistribute": "0"
+            }
+        ],
+        "bribeRewards": []
+    }
+}

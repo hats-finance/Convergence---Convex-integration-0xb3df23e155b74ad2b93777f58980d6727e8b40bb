@@ -1,0 +1,37 @@
+{
+  "1": [
+    {
+      "name": "approve DAI to daiBond user1",
+      "pathAddress": "tokenContracts.DAI",
+      "signer": "user1",
+      "method": "approve",
+      "params": [
+        "BondDepository",
+        "max"
+      ]
+    },
+    {
+      "name": "approve FRAX to fraxBond user1",
+      "pathAddress": "tokenContracts.FRAX",
+      "signer": "user1",
+      "method": "approve",
+      "params": [
+        "BondDepository",
+        "max"
+      ]
+    },
+    {
+      "name": "deposit 100 DAI to daiBond user1",
+      "pathAddress": "BondDepository",
+      "signer": "user1",
+      "method": "deposit",
+      "params": [
+        "1",
+        "0",
+        "amount(100,18)",
+        "0",
+        "user1"
+      ]
+    }
+  ]
+}

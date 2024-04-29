@@ -1,0 +1,56 @@
+{
+  "1": [
+    {
+      "name": "approve Dai to daiBond",
+      "pathAddress": "tokenContracts.DAI",
+      "signer": "user2",
+      "method": "approve",
+      "params": [
+        "BondDepository",
+        "max"
+      ]
+    },
+    {
+      "name": "approve Weth to wethBond",
+      "pathAddress": "tokenContracts.WETH",
+      "signer": "user2",
+      "method": "approve",
+      "params": [
+        "BondDepository",
+        "max"
+      ]
+    },
+    {
+      "log": "tokens approved"
+    },
+    {
+      "name": "deposit bond on daiBond",
+      "pathAddress": "BondDepository",
+      "signer": "user2",
+      "method": "deposit",
+      "params": [
+        "1",
+        "0",
+        "amount(1,18)",
+        "0",
+        "user2"
+      ]
+    },
+    {
+      "name": "deposit bond on wethBond",
+      "pathAddress": "BondDepository",
+      "signer": "user2",
+      "method": "deposit",
+      "params": [
+        "6",
+        "0",
+        "amount(1,18)",
+        "0",
+        "user2"
+      ]
+    },
+    {
+      "log": "bond deposited"
+    }
+  ]
+}

@@ -1,0 +1,267 @@
+{
+  "1": [
+    {
+      "name": "approve sdt to SdtUtilities",
+      "pathAddress": "tokenContracts.SDT",
+      "signer": "user2",
+      "method": "approve",
+      "params": [
+        "SdtUtilities",
+        "max"
+      ]
+    },
+    {
+      "name": "approve SD_CRV to SdtUtilities",
+      "pathAddress": "tokenContracts.SD_CRV",
+      "signer": "user2",
+      "method": "approve",
+      "params": [
+        "SdtUtilities",
+        "max"
+      ]
+    },
+    {
+      "name": "approve SD_BAL to SdtUtilities",
+      "pathAddress": "tokenContracts.SD_BAL",
+      "signer": "user2",
+      "method": "approve",
+      "params": [
+        "SdtUtilities",
+        "max"
+      ]
+    },
+    {
+      "name": "approve SD_PENDLE to SdtUtilities",
+      "pathAddress": "tokenContracts.SD_PENDLE",
+      "signer": "user2",
+      "method": "approve",
+      "params": [
+        "SdtUtilities",
+        "max"
+      ]
+    },
+    {
+      "name": "approve SD_FXS to SdtUtilities",
+      "pathAddress": "tokenContracts.SD_FXS",
+      "signer": "user2",
+      "method": "approve",
+      "params": [
+        "SdtUtilities",
+        "max"
+      ]
+    },
+    {
+      "name": "approve SD_ANGLE to SdtUtilities",
+      "pathAddress": "tokenContracts.SD_ANGLE",
+      "signer": "user2",
+      "method": "approve",
+      "params": [
+        "SdtUtilities",
+        "max"
+      ]
+    },
+    {
+      "name": "approve Dai to daiBond",
+      "pathAddress": "tokenContracts.DAI",
+      "signer": "user2",
+      "method": "approve",
+      "params": [
+        "BondDepository",
+        "max"
+      ]
+    },
+    {
+      "name": "approve Weth to wethBond",
+      "pathAddress": "tokenContracts.WETH",
+      "signer": "user2",
+      "method": "approve",
+      "params": [
+        "BondDepository",
+        "max"
+      ]
+    },
+    {
+      "name": "approve cvg to lockingPositionService",
+      "pathAddress": "Cvg",
+      "signer": "user2",
+      "method": "approve",
+      "params": [
+        "LockingPositionService",
+        "max"
+      ]
+    },
+    {
+      "log": "tokens approved"
+    },
+    {
+      "name": "deposit bond on Bond DAI (id: 1)",
+      "pathAddress": "BondDepository",
+      "signer": "user2",
+      "method": "deposit",
+      "params": [
+        "1",
+        "0",
+        "amount(1,18)",
+        "0",
+        "user2"
+      ]
+    },
+    {
+      "name": "deposit bond on Bond WETH (id: 6)",
+      "pathAddress": "BondDepository",
+      "signer": "user2",
+      "method": "deposit",
+      "params": [
+        "6",
+        "0",
+        "amount(1,18)",
+        "0",
+        "user2"
+      ]
+    },
+    {
+      "log": "bond deposited"
+    },
+    {
+      "name": "deposit in cvgSdtStaking with user2 (via SdtUtilities)",
+      "pathAddress": "SdtUtilities",
+      "signer": "user2",
+      "method": "convertAndStakeCvgSdt",
+      "params": [
+        "0",
+        "0",
+        "amount(100,18)"
+      ]
+    },
+    {
+      "name": "deposit in sdCRVGAUGEContractStaking with user2 (via SdtUtilities)",
+      "pathAddress": "SdtUtilities",
+      "signer": "user2",
+      "method": "convertAndStakeSdAsset",
+      "params": [
+        "0",
+        "stakingContracts.sdCRVGAUGEContractStaking",
+        "0",
+        "amount(100,18)",
+        "0",
+        false
+      ]
+    },
+    {
+      "name": "deposit in sdBALGAUGEContractStaking with user2 (via SdtUtilities)",
+      "pathAddress": "SdtUtilities",
+      "signer": "user2",
+      "method": "convertAndStakeSdAsset",
+      "params": [
+        "0",
+        "stakingContracts.sdBALGAUGEContractStaking",
+        "0",
+        "amount(100,18)",
+        "0",
+        false
+      ]
+    },
+    {
+      "name": "deposit in sdPENDLEGAUGEContractStaking with user2 (via SdtUtilities)",
+      "pathAddress": "SdtUtilities",
+      "signer": "user2",
+      "method": "convertAndStakeSdAsset",
+      "params": [
+        "0",
+        "stakingContracts.sdPENDLEGAUGEContractStaking",
+        "0",
+        "amount(100,18)",
+        "0",
+        false
+      ]
+    },
+    {
+      "name": "deposit in sdFXSGAUGEContractStaking with user2 (via SdtUtilities)",
+      "pathAddress": "SdtUtilities",
+      "signer": "user2",
+      "method": "convertAndStakeSdAsset",
+      "params": [
+        "0",
+        "stakingContracts.sdFXSGAUGEContractStaking",
+        "0",
+        "amount(100,18)",
+        "0",
+        false
+      ]
+    },
+    {
+      "name": "deposit in sdANGLEGAUGEContractStaking with user2 (via SdtUtilities)",
+      "pathAddress": "SdtUtilities",
+      "signer": "user2",
+      "method": "convertAndStakeSdAsset",
+      "params": [
+        "0",
+        "stakingContracts.sdANGLEGAUGEContractStaking",
+        "0",
+        "amount(100,18)",
+        "0",
+        false
+      ]
+    },
+    {
+      "log": "staking deposited"
+    },
+    {
+      "name": "lock for 100% Ys",
+      "pathAddress": "LockingPositionService",
+      "signer": "user2",
+      "method": "mintPosition",
+      "params": [
+        "95",
+        "amount(100,18)",
+        "100",
+        "user2",
+        true
+      ]
+    },
+    {
+      "name": "lock for 100% Ve",
+      "pathAddress": "LockingPositionService",
+      "signer": "user2",
+      "method": "mintPosition",
+      "params": [
+        "95",
+        "amount(100,18)",
+        "0",
+        "user2",
+        true
+      ]
+    },
+    {
+      "name": "lock for 50% Ve",
+      "pathAddress": "LockingPositionService",
+      "signer": "user2",
+      "method": "mintPosition",
+      "params": [
+        "95",
+        "amount(100,18)",
+        "50",
+        "user2",
+        true
+      ]
+    },
+    {
+      "log": "locking positions minted"
+    },
+    {
+      "processCvg": "1"
+    },
+    {
+      "processSdt": "1"
+    },
+    {
+      "processCvg": "1"
+    },
+    {
+      "processSdt": "1"
+    },
+    {
+      "processCvg": "12"
+    }
+  ]
+}
