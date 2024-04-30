@@ -90,6 +90,9 @@ contract StakingServiceBase is Ownable2StepUpgradeable {
     /// @dev Convergence token
     ICvg public constant CVG = ICvg(0x97efFB790f2fbB701D88f89DB4521348A2B77be8);
 
+    /// @dev ID created for the reentrancy lock
+    bytes32 private constant LOCK = keccak256("LOCK");
+
     /// @notice Deposits are paused when true
     bool public depositPaused;
 
@@ -193,6 +196,19 @@ contract StakingServiceBase is Ownable2StepUpgradeable {
     }
 
     uint256[50] private __gap;
+
+    modifier lockReentrancy() {
+        /// @dev Reentrancy lock check
+        require(_tload(LOCK) == 0, "NOT_LOCKED");
+
+        /// @dev Reentrancy lock set
+        _tstore(LOCK, 1);
+
+        _;
+
+        /// @dev Reentrancy lock clear
+        _tstore(LOCK, 0);
+    }
 
     /* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=
                       CONSTRUCTOR & INIT
@@ -1042,6 +1058,18 @@ contract StakingServiceBase is Ownable2StepUpgradeable {
         } else {
             require(_poolEthInfo.token == address(asset), "WRONG TOKEN");
             poolEthInfo = _poolEthInfo;
+        }
+    }
+
+    function _tstore(bytes32 location, uint256 value) private {
+        assembly {
+            tstore(location, value)
+        }
+    }
+
+    function _tload(bytes32 location) private view returns (uint256 value) {
+        assembly {
+            value := tload(location)
         }
     }
 }

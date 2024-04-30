@@ -12,11 +12,10 @@ import chaiAsPromised from "chai-as-promised";
 chai.use(chaiAsPromised).should();
 import {increaseCvgCycleNoCheck} from "../../../fixtures/stake-dao";
 import {TypedContractEvent, TypedDeferredTopicFilter} from "../../../../typechain-types/common";
+import {ClaimCvgMultipleEvent, ClaimCvgCvxMultipleEvent} from "../../../../typechain-types/contracts/Staking/Convex/CvxStakingPositionService";
 import {getExpectedCvgCvxRewards} from "../../../../utils/stakeDao/getStakingShareForCycle";
 import {EMPTY_CVX_DATA_STRUCT} from "../../../../resources/convex";
 import {OWNABLE_REVERT} from "../../../../resources/revert";
-import {ClaimCvgMultipleEvent} from "../../../../typechain-types/contracts/poc/SdtStakingPositionServiceV2";
-import {ClaimCvgCvxMultipleEvent} from "../../../../typechain-types/contracts/Staking/Convex/StakingServiceBase";
 
 describe("CvgCvxStaking - Claim CvgCVX Rewards", () => {
     let contractsUsers: IContractsConvex;
@@ -466,14 +465,5 @@ describe("CvgCvxStaking - Claim CvgCVX Rewards", () => {
     it("Success: set setCvxDelegateRegistry", async () => {
         await cvxConvergenceLocker.connect(treasuryDao).setCvxDelegateRegistry(users.user1);
         expect(await cvxConvergenceLocker.cvxDelegateRegistry()).to.be.eq(users.user1);
-    });
-
-    it("Fail: set processor percentage with too high percentage", async () => {
-        await cvxConvergenceLocker.connect(treasuryDao).setProcessorRewardsPercentage(3001).should.be.revertedWith("PERCENTAGE_TOO_HIGH");
-    });
-
-    it("Success: set processor percentage", async () => {
-        await cvxConvergenceLocker.connect(treasuryDao).setProcessorRewardsPercentage(3000);
-        expect(await cvxConvergenceLocker.processorRewardsPercentage()).to.be.eq(3000);
     });
 });

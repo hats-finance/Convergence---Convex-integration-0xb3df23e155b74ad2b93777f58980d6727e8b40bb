@@ -168,7 +168,7 @@ contract CvxAssetStakerBuffer is Ownable2StepUpgradeable {
 
             if (amountToStakers != 0) {
                 token.safeTransfer(rewardReceiver, amountToStakers);
-                rewardAssets[i] = ICommonStruct.TokenAmount({token: token, amount: amountToStakers});
+                rewardAssets[i - counterDelete] = ICommonStruct.TokenAmount({token: token, amount: amountToStakers});
             }
 
             if (processorFees != 0) {

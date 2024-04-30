@@ -4,9 +4,12 @@ import {TREASURY_DAO} from "../../resources/treasury";
 import {fetchMainnetContracts} from "./stake-dao";
 import {TOKEN_ADDR_USDC, TOKEN_ADDR_WETH} from "../../resources/tokens/common";
 import {ONE_WEEK} from "../../resources/constant";
+import { configureAccounts } from "./testContext";
 
 export async function deployBondDepositoryV2() {
-    const mainnetContracts = await fetchMainnetContracts();
+    const users = await configureAccounts();
+
+    const mainnetContracts = await fetchMainnetContracts(users);
 
     await mainnetContracts.users.user1.sendTransaction({
         to: TREASURY_DAO,

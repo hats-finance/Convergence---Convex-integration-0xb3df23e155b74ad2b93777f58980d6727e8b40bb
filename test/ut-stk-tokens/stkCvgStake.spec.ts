@@ -11,6 +11,7 @@ import chai from "chai";
 import chaiAsPromised from "chai-as-promised";
 chai.use(chaiAsPromised).should();
 import {time} from "@nomicfoundation/hardhat-toolbox/network-helpers";
+import {deployConvexFixture} from "../fixtures/convex-fixtures";
 
 const one_month = 86_400 * 30;
 
@@ -20,15 +21,15 @@ describe("stkCvgStake Test", () => {
     let stkCvgEth: StkCvg;
 
     before(async () => {
-        const contractsUsers = await loadFixture(deployStkContracts);
-        users = contractsUsers.users;
+        const contractsUserMainnet = await loadFixture(deployStkContracts);
+        users = contractsUserMainnet.users;
 
         treasuryDao = await ethers.getSigner(TREASURY_DAO);
 
-        stkCvgEth = contractsUsers.stkCvgEth;
-        cvg = contractsUsers.cvg;
-        weth = contractsUsers.contracts.globalAssets["weth"];
-        wstETH = contractsUsers.contracts.globalAssets["wstETH"];
+        stkCvgEth = contractsUserMainnet.stkCvgEth;
+        cvg = contractsUserMainnet.cvg;
+        weth = contractsUserMainnet.globalAssets["weth"];
+        wstETH = contractsUserMainnet.globalAssets["wstETH"];
 
         // approvals
         await cvg.connect(users.user1).approve(stkCvgEth, MaxUint256);

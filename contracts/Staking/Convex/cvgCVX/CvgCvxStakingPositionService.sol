@@ -10,7 +10,7 @@
                                 |___/
  */
 
-/// @title Cvg-Finance - CvxStakingPositionService
+/// @title Cvg-Finance - CvgCvxStakingPositionService
 /// @notice Staking contract of Convex integration.
 ///         Allow to Stake, Unstake and Claim rewards.
 ///         Cvg Rewards are distributed by CvgCycle, each week.
@@ -25,7 +25,7 @@ import "../../../interfaces/Convex/ICvxRewardDistributor.sol";
 
 interface ICvx1 is IERC20 {
     function mint(address receiver, uint256 amount) external;
-    function withdraw(uint256 _amount) external;
+    function withdraw(uint256 _amount, address receiver) external;
 }
 
 contract CvgCvxStakingPositionService is StakingServiceBase {
@@ -133,7 +133,11 @@ contract CvgCvxStakingPositionService is StakingServiceBase {
      * @param minAmountOutCvx for the swap ETH => CVX
      * @param minCvgCvxAmountOut for the swap CVX => cvgCVX
      */
-    function depositEth(uint256 tokenId, uint256 minAmountOutCvx, uint256 minCvgCvxAmountOut) external payable {
+    function depositEth(
+        uint256 tokenId,
+        uint256 minAmountOutCvx,
+        uint256 minCvgCvxAmountOut
+    ) external payable lockReentrancy {
         uint256 amountCvx = _depositEth(msg.value, minAmountOutCvx);
         _deposit(tokenId, 0, DepositCvxData({amount: amountCvx, minAmountOut: minCvgCvxAmountOut}), true);
     }
@@ -181,10 +185,7 @@ contract CvgCvxStakingPositionService is StakingServiceBase {
             uint256 exchangedAmount = curvePool.exchange(1, 0, amount, minCvx1AmountOut, address(this));
 
             /// @dev withdraw CVX from CVX1 contract
-            _cvx1.withdraw(exchangedAmount);
-
-            /// @dev send CVX to msg.sender
-            CVX.transfer(msg.sender, exchangedAmount);
+            _cvx1.withdraw(exchangedAmount, msg.sender);
         } else if (tokenType == TOKEN_TYPE.CVX1) {
             /// @dev swap cvgCVX to CVX1 through the Curve pool and directly send tokens to user
             curvePool.exchange(1, 0, amount, minCvx1AmountOut, msg.sender);

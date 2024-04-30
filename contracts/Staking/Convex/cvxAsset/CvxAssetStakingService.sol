@@ -125,7 +125,7 @@ contract CvxAssetStakingService is StakingServiceBase {
         uint256 minAmountOutCvxAsset,
         bool isLock,
         bool isStake
-    ) external payable {
+    ) external payable lockReentrancy {
         uint256 amountAsset = _depositEth(msg.value, minAmountOutAsset);
         _deposit(tokenId, amountAsset, INPUT_TOKEN_TYPE.asset, minAmountOutCvxAsset, isLock, isStake, true);
     }

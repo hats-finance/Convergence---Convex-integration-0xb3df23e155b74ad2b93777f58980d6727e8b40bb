@@ -61,8 +61,14 @@ contract CvxConvergenceLocker is ERC20Upgradeable, Ownable2StepUpgradeable {
     /// @dev Represents the fees taken when minting cvgCVX without locking
     uint256 public mintFees;
 
-    /// @notice Percentage of rewards to be sent to the user who processed the CVX rewards
-    uint256 public processorRewardsPercentage;
+    struct RewardConfiguration {
+        IERC20 token;
+        uint48 processorFees;
+        uint48 podFees;
+    }
+
+    /// @notice Contains all rewarded ERC20 and associated fees taken
+    RewardConfiguration[] public rewardTokensConfiguration;
 
     /* =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=
                         CONSTRUCTOR & INIT
@@ -77,15 +83,22 @@ contract CvxConvergenceLocker is ERC20Upgradeable, Ownable2StepUpgradeable {
         string memory _name,
         string memory _symbol,
         IDelegateRegistry _cvxDelegateRegistry,
-        ICvx1 _cvx1
+        ICvx1 _cvx1,
+        RewardConfiguration[] calldata _rewardTokensConfiguration
     ) external initializer {
         __ERC20_init(_name, _symbol);
 
         mintFees = 100; // 1%
-        processorRewardsPercentage = 1000; // 1%
 
         cvxDelegateRegistry = _cvxDelegateRegistry;
         cvx1 = _cvx1;
+
+        for (uint256 i; i < _rewardTokensConfiguration.length; ) {
+            rewardTokensConfiguration.push(_rewardTokensConfiguration[i]);
+            unchecked {
+                ++i;
+            }
+        }
 
         CVX.approve(address(CVX_LOCKER), type(uint256).max);
 
@@ -110,86 +123,61 @@ contract CvxConvergenceLocker is ERC20Upgradeable, Ownable2StepUpgradeable {
     function pullRewards(address processor) external returns (ICommonStruct.TokenAmount[] memory) {
         require(msg.sender == cvxStakingPositionService, "NOT_CVG_CVX_STAKING");
 
+        /// @dev stake all CVX on the CVX1 contract
+        cvx1.stake();
+
         /// @dev claim rewards
         CVX_LOCKER.getReward(address(this));
 
-        // balance of rewards
-        uint256 cvxAmount = CVX.balanceOf(address(this)) - cvxToLock;
-        uint256 crvAmount = CRV.balanceOf(address(this));
-        uint256 fxsAmount = FXS.balanceOf(address(this));
-        uint256 cvgCvxAmount = balanceOf(address(this));
+        uint256 rewardLength = rewardTokensConfiguration.length;
+        address treasuryPod = cvgControlTower.treasuryPod();
+        address rewardReceiver = address(cvgControlTower.cvxRewardDistributor());
 
-        /// @dev TokenAmount array struct returned
-        ICommonStruct.TokenAmount[] memory cvxRewardAssets = new ICommonStruct.TokenAmount[](4);
-        uint256 counter;
+        ICommonStruct.TokenAmount[] memory cvxRewardAssets = new ICommonStruct.TokenAmount[](rewardLength);
+        uint256 counterDelete;
 
-        // processor fees
-        uint256 _processorRewardsPercentage = processorRewardsPercentage;
-        address cvxRewardDistributor = address(cvgControlTower.cvxRewardDistributor());
+        for (uint256 i; i < rewardLength; ) {
+            RewardConfiguration memory rewardConfiguration = rewardTokensConfiguration[i];
+            uint256 balance = rewardConfiguration.token.balanceOf(address(this));
 
-        if (cvxAmount != 0) {
-            /// @dev send rewards to claimer
-            uint256 processorRewards = (cvxAmount * _processorRewardsPercentage) / DENOMINATOR;
-            if (processorRewards != 0) {
-                CVX.transfer(processor, processorRewards);
-                cvxAmount -= processorRewards;
+            /// @dev if reward token is CVX, remove the amount of CVX to lock from the rewards
+            if (rewardConfiguration.token == CVX) balance -= cvxToLock;
+
+            uint256 processorFees = (balance * rewardConfiguration.processorFees) / DENOMINATOR;
+            uint256 podFees = (balance * rewardConfiguration.podFees) / DENOMINATOR;
+            uint256 amountToStakers = balance - podFees - processorFees;
+
+            if (amountToStakers != 0) {
+                rewardConfiguration.token.safeTransfer(rewardReceiver, amountToStakers);
+                cvxRewardAssets[i - counterDelete] = ICommonStruct.TokenAmount({
+                    token: rewardConfiguration.token,
+                    amount: amountToStakers
+                });
             }
 
-            cvxRewardAssets[counter++] = ICommonStruct.TokenAmount({token: CVX, amount: cvxAmount});
-
-            CVX.transfer(cvxRewardDistributor, cvxAmount);
-        }
-
-        if (crvAmount != 0) {
-            /// @dev send rewards to claimer
-            uint256 processorRewards = (crvAmount * _processorRewardsPercentage) / DENOMINATOR;
-            if (processorRewards != 0) {
-                CRV.transfer(processor, processorRewards);
-                crvAmount -= processorRewards;
+            if (processorFees != 0) {
+                rewardConfiguration.token.safeTransfer(processor, processorFees);
             }
 
-            cvxRewardAssets[counter++] = ICommonStruct.TokenAmount({token: CRV, amount: crvAmount});
-
-            CRV.transfer(cvxRewardDistributor, crvAmount);
-        }
-
-        if (fxsAmount != 0) {
-            uint256 processorRewards = (fxsAmount * _processorRewardsPercentage) / DENOMINATOR;
-            if (processorRewards != 0) {
-                FXS.transfer(processor, processorRewards);
-                fxsAmount -= processorRewards;
+            if (podFees != 0) {
+                rewardConfiguration.token.safeTransfer(treasuryPod, podFees);
             }
 
-            cvxRewardAssets[counter++] = ICommonStruct.TokenAmount({token: FXS, amount: fxsAmount});
-
-            FXS.transfer(cvxRewardDistributor, fxsAmount);
-        }
-
-        /// @dev distributes if the balance is different from 0
-        if (cvgCvxAmount != 0) {
-            /// @dev send rewards to claimer
-            uint256 processorRewards = (cvgCvxAmount * _processorRewardsPercentage) / DENOMINATOR;
-            if (processorRewards != 0) {
-                transfer(processor, processorRewards);
-                cvgCvxAmount -= processorRewards;
+            if (balance == 0) {
+                unchecked {
+                    ++counterDelete;
+                }
             }
 
-            cvxRewardAssets[counter++] = ICommonStruct.TokenAmount({
-                token: IERC20(address(this)),
-                amount: cvgCvxAmount
-            });
-
-            /// @dev transfers all cvgCVX to the cvxRewardDistributor
-            transfer(cvxRewardDistributor, cvgCvxAmount);
+            unchecked {
+                ++i;
+            }
         }
 
         // solhint-disable-next-line no-inline-assembly
         assembly {
-            mstore(cvxRewardAssets, sub(mload(cvxRewardAssets), sub(4, counter)))
+            mstore(cvxRewardAssets, sub(mload(cvxRewardAssets), counterDelete))
         }
-
-        /// @dev stake all CVX on the CVX1 contract
-        cvx1.stake();
 
         return cvxRewardAssets;
     }
@@ -295,12 +283,31 @@ contract CvxConvergenceLocker is ERC20Upgradeable, Ownable2StepUpgradeable {
     }
 
     /**
-     * @notice Set the percentage of rewards to be sent to the user processing the CVX rewards.
-     * @param _percentage rewards percentage value
+     * @notice Setup the list of rewards and fees from Convex that the contract distributes as reward
+     * @dev Callable only by the contract owner.
      */
-    function setProcessorRewardsPercentage(uint256 _percentage) external onlyOwner {
-        /// @dev it must never exceed 3%
-        require(_percentage <= 3000, "PERCENTAGE_TOO_HIGH");
-        processorRewardsPercentage = _percentage;
+    function setRewardTokensConfiguration(
+        RewardConfiguration[] calldata _rewardTokensConfiguration
+    ) external onlyOwner {
+        delete rewardTokensConfiguration;
+
+        for (uint256 i; i < _rewardTokensConfiguration.length; ) {
+            rewardTokensConfiguration.push(_rewardTokensConfiguration[i]);
+            unchecked {
+                ++i;
+            }
+        }
+    }
+
+    /**
+     * @notice Add new reward token configuration
+     * @dev Callable only by the contract owner.
+     */
+    function addRewardTokenConfiguration(RewardConfiguration calldata _rewardTokenConfiguration) external onlyOwner {
+        rewardTokensConfiguration.push(_rewardTokenConfiguration);
+    }
+
+    function getRewardTokensConfiguration() external view returns (RewardConfiguration[] memory) {
+        return rewardTokensConfiguration;
     }
 }

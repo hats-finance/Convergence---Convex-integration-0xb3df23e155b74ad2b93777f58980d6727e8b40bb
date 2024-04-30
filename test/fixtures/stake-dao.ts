@@ -1,7 +1,7 @@
 import {configureAccounts, deployBase} from "./testContext";
 import deployers from "../../scripts/deployer/unit/_index";
 import {FakeLiquidityDeployer} from "../../utils/FakeLiquidityDeployer";
-import {IContractsUser, IContractsUserMainnet} from "../../utils/contractInterface";
+import {IContractsUser, IContractsUserMainnet, IUsers} from "../../utils/contractInterface";
 import {bedTestSdtStaking} from "../Beds/bedTest-sdt-staking";
 import {
     goOnNextWeek,
@@ -38,9 +38,7 @@ import {TOKEN_ADDR_CRV, TOKEN_ADDR_FRAX, TOKEN_ADDR_SDT} from "../../resources/t
 import {getGlobalAssets} from "../../scripts/deployer/unit/XX_setStorageBalanceAssets";
 import {CvgOracle} from "../../typechain-types";
 
-export async function fetchMainnetContracts() {
-    let users = await configureAccounts();
-
+export async function fetchMainnetContracts(users: IUsers) {
     const globalAssets = await getGlobalAssets(users);
 
     const presaleWl = await ethers.getContractAt("WlPresaleCvg", PRESALE_WL);

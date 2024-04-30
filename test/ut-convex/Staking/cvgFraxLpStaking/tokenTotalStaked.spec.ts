@@ -24,7 +24,7 @@ import {increaseCvgCycleNoCheck} from "../../../fixtures/stake-dao";
 import {MINT, TOKEN_1, TOKEN_2, TOKEN_3} from "../../../../resources/constant";
 
 import {TypedContractEvent, TypedDeferredTopicFilter} from "../../../../typechain-types/common";
-import {ClaimCvgCvxMultipleEvent, ClaimCvgMultipleEvent} from "../../../../typechain-types/contracts/Staking/Convex/CvxStakingPositionService";
+import {ClaimCvgCvxMultipleEvent, ClaimCvgMultipleEvent} from "../../../../typechain-types/contracts/Staking/Convex/StakingServiceBase";
 
 describe("cvgFraxLpStaking - tokenTotalStaked", () => {
     let contractsUsers: IContractsConvex;

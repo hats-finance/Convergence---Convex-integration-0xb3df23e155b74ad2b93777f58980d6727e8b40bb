@@ -2,47 +2,47 @@ import {loadFixture, time, impersonateAccount} from "@nomicfoundation/hardhat-ne
 import {ethers} from "hardhat";
 import {Signer} from "ethers";
 import {expect} from "chai";
-import {IContractsUserMainnet, IUsers} from "../../utils/contractInterface";
+import {IContractsConvex, IContractsUserMainnet, IUsers} from "../../utils/contractInterface";
 import {ERC20, LockingPositionManager, LockingPositionService, YsStreamer} from "../../typechain-types";
 import {TREASURY_DAO} from "../../resources/treasury";
 import {deployProxy} from "../../utils/global/deployProxy";
 import {STREAM_PERIOD_YS, TDE_2, TOKEN_3, TOKEN_5, TOKEN_8} from "../../resources/constant";
 import chai from "chai";
 import chaiAsPromised from "chai-as-promised";
-import {fetchMainnetConvexContracts} from "../fixtures/convex-fixtures";
 import {goOnNextWeek} from "../../utils/locking/invariants.checks";
+import {deployConvexFixture} from "../fixtures/convex-fixtures";
 chai.use(chaiAsPromised).should();
 describe("YsStreamer - Tests", () => {
-    let contractsUsers: IContractsUserMainnet;
+    let contractsUsers: IContractsConvex;
     let users: IUsers, treasuryDao: Signer;
     let cvx: ERC20, fxs: ERC20, crv: ERC20, dai: ERC20;
     let lockingService: LockingPositionService, lockingManager: LockingPositionManager;
     let ysStreamer: YsStreamer;
 
     before(async () => {
-        contractsUsers = await loadFixture(fetchMainnetConvexContracts);
-        users = contractsUsers.users;
+        contractsUsers = await loadFixture(deployConvexFixture);
+        users = contractsUsers.contractsUserMainnet.users;
         await users.user1.sendTransaction({to: TREASURY_DAO, value: ethers.parseEther("100")});
         await impersonateAccount(TREASURY_DAO);
         treasuryDao = await ethers.getSigner(TREASURY_DAO);
-        crv = contractsUsers.globalAssets.crv;
-        cvx = contractsUsers.globalAssets.cvx;
-        fxs = contractsUsers.globalAssets.fxs;
-        dai = contractsUsers.globalAssets.dai;
-        lockingService = contractsUsers.locking.lockingPositionService;
-        lockingManager = contractsUsers.locking.lockingPositionManager;
-        ysStreamer = await deployProxy<YsStreamer>("", [], "YsStreamer", contractsUsers.base.proxyAdmin);
+        crv = contractsUsers.contractsUserMainnet.globalAssets.crv;
+        cvx = contractsUsers.contractsUserMainnet.globalAssets.cvx;
+        fxs = contractsUsers.contractsUserMainnet.globalAssets.fxs;
+        dai = contractsUsers.contractsUserMainnet.globalAssets.dai;
+        lockingService = contractsUsers.contractsUserMainnet.locking.lockingPositionService;
+        lockingManager = contractsUsers.contractsUserMainnet.locking.lockingPositionManager;
+        ysStreamer = await deployProxy<YsStreamer>("", [], "YsStreamer", contractsUsers.contractsUserMainnet.base.proxyAdmin);
 
-        await contractsUsers.cvg.connect(users.user1).approve(lockingService, ethers.MaxUint256);
+        await contractsUsers.contractsUserMainnet.cvg.connect(users.user1).approve(lockingService, ethers.MaxUint256);
     });
     it("Increase cycle", async () => {
         const cycleAmount = 1;
-        const cvgRewards = contractsUsers.rewards.cvgRewards;
-        const treasuryDao = contractsUsers.users.treasuryDao;
+        const cvgRewards = contractsUsers.contractsUserMainnet.rewards.cvgRewards;
+        const treasuryDao = contractsUsers.contractsUserMainnet.users.treasuryDao;
         for (let i = 0; i < cycleAmount; i++) {
-            const actualCycle = await contractsUsers.base.cvgControlTower.cvgCycle();
+            const actualCycle = await contractsUsers.contractsUserMainnet.base.cvgControlTower.cvgCycle();
             await goOnNextWeek();
-            await contractsUsers.locking.veCvg.checkpoint();
+            await contractsUsers.contractsUserMainnet.locking.veCvg.checkpoint();
 
             await (await cvgRewards.connect(treasuryDao).writeStakingRewards(3)).wait();
         }

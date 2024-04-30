@@ -7,7 +7,7 @@ import {loadFixture} from "@nomicfoundation/hardhat-network-helpers";
 import {deployYsDistributorFixture} from "../../fixtures/stake-dao";
 import {ethers} from "hardhat";
 import {Signer} from "ethers";
-import {LockingPositionManager, LockingPositionService, VeSDTAirdrop} from "../../../typechain-types/";
+import {LockingPositionManager, LockingPositionService, VeSDTAirdrop} from "../../../typechain-types";
 import {Cvg} from "../../../typechain-types/contracts/Token";
 import {IContracts, IUsers} from "../../../utils/contractInterface";
 import {MerkleHelper} from "../../../utils/MerkleHelper";

@@ -11,7 +11,8 @@ import {
     CVX_FXS_DEPOSITOR,
     CVX_FXS_WRAPPER,
     CVX_PRISMA_DEPOSITOR,
-    CVX_PRISMA_WRAPPER, CVX_STAKING_CONTRACT,
+    CVX_PRISMA_WRAPPER,
+    CVX_STAKING_CONTRACT,
     DELEGATE_REGISTRY_CONVEX,
     TOKEN_ADDR_CVX_CRV,
     TOKEN_ADDR_CVX_FPIS,
@@ -27,7 +28,8 @@ import {
     CvxRewardDistributor,
     CvgFraxLpLocker,
     CvgCvxStakingPositionService,
-    CvgFraxLpStakingService, CVX1,
+    CvgFraxLpStakingService,
+    CVX1,
 } from "../../typechain-types";
 import {IContractsUserMainnet, IContractsConvex} from "../../utils/contractInterface";
 import {deployProxy} from "../../utils/global/deployProxy";
@@ -55,33 +57,23 @@ import {
     TOKEN_ADDR_3CRV,
 } from "../../resources/lp";
 
-export async function fetchMainnetConvexContracts(): Promise<IContractsUserMainnet> {
+export async function deployConvexFixture(): Promise<IContractsConvex> {
     // remove votes tracking on FXS token
     await setStorageAt(TOKEN_ADDR_FXS, 11, 0);
 
     const users = await configureAccounts();
+    await impersonateAccount(TREASURY_DAO);
+    const treasuryDao = await ethers.getSigner(TREASURY_DAO);
 
-    const contracts = await fetchMainnetContracts();
+    const contracts = await fetchMainnetContracts(users);
     const {convexAssets, curveLps} = await getConvexAssets(users);
 
-    return {
-        ...contracts,
-        convexAssets,
-        curveLps,
-    };
-}
-
-export async function deployConvexFixture(): Promise<IContractsConvex> {
-    const contractsUserMainnet = await fetchMainnetConvexContracts();
-
-    await contractsUserMainnet.users.user1.sendTransaction({
+    await contracts.users.user1.sendTransaction({
         to: TREASURY_DAO,
         value: ethers.parseEther("100"),
     });
 
-    await impersonateAccount(TREASURY_DAO);
-    const treasuryDao = await ethers.getSigner(TREASURY_DAO);
-    const proxyAdmin = contractsUserMainnet.base.proxyAdmin;
+    const proxyAdmin = contracts.base.proxyAdmin;
 
     const cvxLocker = await ethers.getContractAt("ICvxLocker", CONVEX_LOCKER);
 
@@ -93,8 +85,8 @@ export async function deployConvexFixture(): Promise<IContractsConvex> {
     let cvgControlTowerV2 = await ethers.deployContract("CvgControlTowerV2", []);
     await cvgControlTowerV2.waitForDeployment();
 
-    await proxyAdmin.connect(treasuryDao).upgrade(contractsUserMainnet.base.cvgControlTower, cvgControlTowerV2);
-    cvgControlTowerV2 = await ethers.getContractAt("CvgControlTowerV2", contractsUserMainnet.base.cvgControlTower);
+    await proxyAdmin.connect(treasuryDao).upgrade(contracts.base.cvgControlTower, cvgControlTowerV2);
+    cvgControlTowerV2 = await ethers.getContractAt("CvgControlTowerV2", contracts.base.cvgControlTower);
 
     /// Migration CloneFactory V2
     const CloneFactory = await ethers.getContractFactory("CloneFactory");
@@ -104,8 +96,8 @@ export async function deployConvexFixture(): Promise<IContractsConvex> {
     let cloneFactoryV2 = await ethers.deployContract("CloneFactoryV2", []);
     await cloneFactoryV2.waitForDeployment();
 
-    await proxyAdmin.connect(treasuryDao).upgrade(contractsUserMainnet.base.cloneFactory, cloneFactoryV2);
-    cloneFactoryV2 = await ethers.getContractAt("CloneFactoryV2", contractsUserMainnet.base.cloneFactory);
+    await proxyAdmin.connect(treasuryDao).upgrade(contracts.base.cloneFactory, cloneFactoryV2);
+    cloneFactoryV2 = await ethers.getContractAt("CloneFactoryV2", contracts.base.cloneFactory);
 
     /// Setup Proxy Beacon for CvxAssets
 
@@ -130,24 +122,28 @@ export async function deployConvexFixture(): Promise<IContractsConvex> {
 
     // set CVX token
     await cvgControlTowerV2.connect(treasuryDao).setCvx(TOKEN_ADDR_CVX);
-
     // deploy CVX1 and mint some
-    const CVX1 = await deployProxy<CVX1>(
-        "string,string,address",
-        ["Convergence Staked CVX", "CVX1", CVX_STAKING_CONTRACT],
-        "CVX1",
-        proxyAdmin
-    );
-    await contractsUserMainnet.globalAssets.cvx.approve(CVX1, ethers.parseEther("10000"));
-    await CVX1.mint(contractsUserMainnet.users.owner, ethers.parseEther("10000"));
-
+    const CVX1 = await deployProxy<CVX1>("string,string,address", ["Convergence Staked CVX", "CVX1", CVX_STAKING_CONTRACT], "CVX1", proxyAdmin);
+    await contracts.globalAssets.cvx.approve(CVX1, ethers.parseEther("10000"));
+    await CVX1.mint(contracts.users.owner, ethers.parseEther("10000"));
     // Convex Locker (cvgCVX + Buffer + Locker)
     const cvxConvergenceLocker = await deployProxy<CvxConvergenceLocker>(
-        "string,string,address,address",
-        ["Convergence CVX", "cvgCVX", DELEGATE_REGISTRY_CONVEX, await CVX1.getAddress()],
+        "string,string,address,address,(address,uint48,uint48)[]",
+        [
+            "Convergence CVX",
+            "cvgCVX",
+            DELEGATE_REGISTRY_CONVEX,
+            await CVX1.getAddress(),
+            [
+                [TOKEN_ADDR_CVX, 1000, 0],
+                [TOKEN_ADDR_CRV, 1000, 0],
+                [TOKEN_ADDR_FXS, 1000, 0],
+            ],
+        ],
         "CvxConvergenceLocker",
         proxyAdmin
     );
+    await cvxConvergenceLocker.connect(treasuryDao).addRewardTokenConfiguration({token: cvxConvergenceLocker, processorFees: 1000, podFees: 0});
     await cvgControlTowerV2.connect(treasuryDao).setCvxConvergenceLocker(cvxConvergenceLocker);
     const cvxStakingPositionManager = await deployProxy<CvxStakingPositionManager>("", [], "CvxStakingPositionManager", proxyAdmin);
     await cvgControlTowerV2.connect(treasuryDao).setCvxStakingPositionManager(cvxStakingPositionManager);
@@ -180,8 +176,8 @@ export async function deployConvexFixture(): Promise<IContractsConvex> {
     const cvgCvxCvx1PoolContract = await ethers.getContractAt("ICrvPoolPlain", poolAddress);
 
     const amount = ethers.parseEther("10000");
-    await contractsUserMainnet.globalAssets.cvx.approve(cvxConvergenceLocker, amount);
-    await cvxConvergenceLocker.mint(contractsUserMainnet.users.owner, amount, true);
+    await contracts.globalAssets.cvx.approve(cvxConvergenceLocker, amount);
+    await cvxConvergenceLocker.mint(contracts.users.owner, amount, true);
 
     await (await CVX1.approve(poolAddress, ethers.MaxUint256)).wait();
     await (await cvxConvergenceLocker.approve(poolAddress, ethers.MaxUint256)).wait();
@@ -300,7 +296,7 @@ export async function deployConvexFixture(): Promise<IContractsConvex> {
     /// CVGFRAXLP
 
     //cvgFraxLpLocker (eUSD/FRAXBP) TODO: Do we need to use clone pattern for LP ???
-    const curveLpContract = contractsUserMainnet.curveLps!.eusdfraxbp;
+    const curveLpContract = curveLps!.eusdfraxbp;
     const pid = 44;
     const name = "Convergence eUSD/FRAXBP Locker";
     const symbol = "CvgeUSDFRAXBP";
@@ -324,7 +320,7 @@ export async function deployConvexFixture(): Promise<IContractsConvex> {
     );
 
     // Add gauges to GaugeController
-    await contractsUserMainnet.locking.gaugeController
+    await contracts.locking.gaugeController
         .connect(treasuryDao)
         .toggle_votes_pause([
             cvgCvxStakingPositionService,
@@ -335,7 +331,7 @@ export async function deployConvexFixture(): Promise<IContractsConvex> {
             cvxFpisStakingPositionService,
         ]);
 
-    await contractsUserMainnet.locking.gaugeController.connect(treasuryDao).add_gauges([
+    await contracts.locking.gaugeController.connect(treasuryDao).add_gauges([
         {addr: cvgCvxStakingPositionService, gauge_type: 0, weight: 0},
         {addr: cvxCrvStakingPositionService, gauge_type: 0, weight: 0},
         {addr: cvxFxsStakingPositionService, gauge_type: 0, weight: 0},
@@ -347,12 +343,12 @@ export async function deployConvexFixture(): Promise<IContractsConvex> {
     await cvgControlTowerV2.connect(treasuryDao).toggleStakingContract(cvgeUSDFRAXBPStaking);
 
     //stake in wrapper with user1
-    const user1 = contractsUserMainnet.users.user1;
-    const cvxFpis = contractsUserMainnet.convexAssets!["cvxFpis"];
-    const cvxFxs = contractsUserMainnet.convexAssets!["cvxFxs"];
-    const cvxCrv = contractsUserMainnet.convexAssets!["cvxCrv"];
-    const cvxFxn = contractsUserMainnet.convexAssets!["cvxFxn"];
-    const cvxPrisma = contractsUserMainnet.convexAssets!["cvxPrisma"];
+    const user1 = contracts.users.user1;
+    const cvxFpis = convexAssets!["cvxFpis"];
+    const cvxFxs = convexAssets!["cvxFxs"];
+    const cvxCrv = convexAssets!["cvxCrv"];
+    const cvxFxn = convexAssets!["cvxFxn"];
+    const cvxPrisma = convexAssets!["cvxPrisma"];
     const cvxFpisWrapper = await ethers.getContractAt("ICvxAssetWrapper", CVX_FPIS_WRAPPER);
     const cvxFxsWrapper = await ethers.getContractAt("ICvxAssetWrapper", CVX_FXS_WRAPPER);
     const cvxCrvWrapper = await ethers.getContractAt("ICvxAssetWrapper", CVX_CRV_WRAPPER);
@@ -375,7 +371,12 @@ export async function deployConvexFixture(): Promise<IContractsConvex> {
     await cvxPrismaWrapper.connect(user1)["stake(uint256)"](ethers.parseEther("10000000"));
 
     return {
-        contractsUserMainnet,
+        contractsUserMainnet: {
+            ...contracts,
+            curveLps,
+            convexAssets,
+            users,
+        },
         convex: {
             cvxConvergenceLocker,
             cvxStakingPositionManager,

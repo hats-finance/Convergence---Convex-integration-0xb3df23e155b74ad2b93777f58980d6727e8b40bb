@@ -69,7 +69,7 @@ contract CVX1 is ERC20Upgradeable, Ownable2StepUpgradeable {
      * @notice Withdraw an amount of CVX against the burn of CVX1.
      * @param amount Amount of CVX to withdraw.
      */
-    function withdraw(uint256 amount) external {
+    function withdraw(uint256 amount, address receiver) external {
         _burn(msg.sender, amount);
 
         uint256 cvxBalance = CVX.balanceOf(address(this));
@@ -77,7 +77,7 @@ contract CVX1 is ERC20Upgradeable, Ownable2StepUpgradeable {
             cvxRewardPool.withdraw(amount - cvxBalance, false);
         }
 
-        CVX.transfer(msg.sender, amount);
+        CVX.transfer(receiver, amount);
     }
 
     /**

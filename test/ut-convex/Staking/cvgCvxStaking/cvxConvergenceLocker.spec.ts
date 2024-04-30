@@ -1,16 +1,16 @@
 import {loadFixture} from "@nomicfoundation/hardhat-network-helpers";
-import {IContractsConvex, IUsers} from "../../../utils/contractInterface";
-import {deployConvexFixture} from "../../fixtures/convex-fixtures";
+import {IContractsConvex, IUsers} from "../../../../utils/contractInterface";
+import {deployConvexFixture} from "../../../fixtures/convex-fixtures";
 import {ethers} from "hardhat";
-import {CvxConvergenceLocker, ERC20} from "../../../typechain-types";
+import {CvxConvergenceLocker, ERC20} from "../../../../typechain-types";
 import {parseEther, Signer, encodeBytes32String} from "ethers";
 import {expect} from "chai";
 import chai from "chai";
 import chaiAsPromised from "chai-as-promised";
 chai.use(chaiAsPromised).should();
-import {TREASURY_DAO, TREASURY_POD} from "../../../resources/treasury";
-import {CONVEX_LOCKER} from "../../../resources/convex";
-import {OWNABLE_REVERT} from "../../../resources/revert";
+import {TREASURY_DAO, TREASURY_POD} from "../../../../resources/treasury";
+import {CONVEX_LOCKER} from "../../../../resources/convex";
+import {OWNABLE_REVERT} from "../../../../resources/revert";
 
 describe("CvxConvergenceLocker Tests", () => {
     let contractsUsers: IContractsConvex;
@@ -44,7 +44,7 @@ describe("CvxConvergenceLocker Tests", () => {
 
     it("Fails: Initialize contract again", async () => {
         await cvxConvergenceLocker
-            .initialize("Convex CVG", "cvgCVX", users.user1, users.user1)
+            .initialize("Convex CVG", "cvgCVX", users.user1, users.user1, [])
             .should.be.revertedWith("Initializable: contract is already initialized");
     });
 
@@ -60,9 +60,6 @@ describe("CvxConvergenceLocker Tests", () => {
     });
     it("Fails: Set Staking Position Service contract without being owner", async () => {
         await cvxConvergenceLocker.setCvxStakingPositionService(users.user1).should.be.revertedWith(OWNABLE_REVERT);
-    });
-    it("Fails: Set Processor Rewards Percentage without being owner", async () => {
-        await cvxConvergenceLocker.setProcessorRewardsPercentage(500).should.be.revertedWith(OWNABLE_REVERT);
     });
 
     it("Fails: Set mint fees without being owner", async () => {

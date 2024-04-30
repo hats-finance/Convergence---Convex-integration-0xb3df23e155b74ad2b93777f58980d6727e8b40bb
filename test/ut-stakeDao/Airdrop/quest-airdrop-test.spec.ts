@@ -9,7 +9,7 @@ import {ethers, network} from "hardhat";
 import {Signer, parseEther} from "ethers";
 import {Cvg} from "../../../typechain-types/contracts/Token";
 import {IContractsUserMainnet, IUsers} from "../../../utils/contractInterface";
-import {QuestAirdrop} from "../../../typechain-types/";
+import {QuestAirdrop} from "../../../typechain-types";
 import {MerkleNode, MerkleHelper} from "../../../utils/MerkleHelper";
 import {impersonateAccount, time} from "@nomicfoundation/hardhat-toolbox/network-helpers";
 import {TREASURY_AIRDROP, TREASURY_DAO} from "../../../resources/treasury";
